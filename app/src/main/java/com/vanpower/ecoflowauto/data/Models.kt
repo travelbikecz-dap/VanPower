@@ -9,6 +9,14 @@ data class DeviceConfig(
         get() = macAddress.isNotBlank() && serialNumber.isNotBlank()
 }
 
+data class OutputPortSnapshot(
+    val acEnabled: Boolean,
+    val usbEnabled: Boolean,
+    val dcEnabled: Boolean
+) {
+    fun anyEnabled(): Boolean = acEnabled || usbEnabled || dcEnabled
+}
+
 data class Delta3Telemetry(
     val batteryPercent: Int = 0,
     val solarWatts: Int = 0,

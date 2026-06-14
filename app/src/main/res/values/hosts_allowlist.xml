@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Android Auto (release). Formato: digest_sha256,package -->
+    <string-array name="hosts_allowlist">
+        <item>9:69:6E:CE:12:08:AE:4D:53:05:70:0F:99:5C:17:4C:01:0C:A5:B6:B1:E9:90:5D:D8:B2:16:3E:49:CD:32:41,com.google.android.projection.gearhead</item>
+    </string-array>
+</resources>

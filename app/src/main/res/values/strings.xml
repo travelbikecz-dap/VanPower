@@ -36,8 +36,8 @@
     <string name="car_time_minutes">%1$dm</string>
     <string name="car_time_hours">%1$dh</string>
     <string name="car_time_hours_minutes">%1$dh %2$dm</string>
-    <string name="car_station_tap_on">Apagada · Toca para encender la estación</string>
-    <string name="car_station_tap_off">Encendida · Toca para apagar la estación</string>
+    <string name="car_station_tap_on">Suspendida · Toca para activar salidas</string>
+    <string name="car_station_tap_off">Activa · Toca para suspender salidas</string>
     <string name="car_port_on">Activa</string>
     <string name="car_port_off">Apagada</string>
     <string name="car_not_configured">Configura la Delta 3 en VanPower (móvil) antes de usar Android Auto.</string>

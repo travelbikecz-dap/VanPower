@@ -42,6 +42,10 @@ class DeviceRepository(
         bleServiceProvider()?.togglePort(port)
     }
 
+    fun setAllOutputsEnabled(enabled: Boolean) {
+        bleServiceProvider()?.setAllOutputsEnabled(enabled)
+    }
+
     companion object {
         private const val PREFS_NAME = "ecoflow_config"
         private const val KEY_MAC = "mac"

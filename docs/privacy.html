@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VanPower — Política de privacidad</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1a1a; }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p, li { font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>VanPower — Política de privacidad</h1>
+  <p><strong>Última actualización:</strong> junio de 2026</p>
+
+  <h2>Qué es VanPower</h2>
+  <p>
+    VanPower es una aplicación Android de uso personal que controla una estación de energía
+    portátil compatible (Delta 3) desde el teléfono y desde Android Auto, mediante Bluetooth Low Energy (BLE).
+  </p>
+
+  <h2>Datos que recopilamos</h2>
+  <p><strong>No recopilamos ni enviamos datos a servidores propios ni de terceros.</strong></p>
+  <ul>
+    <li>La configuración (dirección MAC, número de serie y User ID) se guarda solo en el dispositivo.</li>
+    <li>La telemetría (batería, vatios, estado de puertos) se obtiene por BLE y se muestra en la app; no se sube a la nube.</li>
+    <li>No hay cuentas de usuario, analíticas ni publicidad en la app.</li>
+  </ul>
+
+  <h2>Permisos</h2>
+  <ul>
+    <li><strong>Bluetooth</strong> — conexión directa con la estación de energía.</li>
+    <li><strong>Ubicación (Android)</strong> — requerido por el sistema para escaneo BLE en versiones antiguas; no se usa para rastreo.</li>
+    <li><strong>Servicio en primer plano</strong> — mantiene la conexión BLE mientras la app está activa.</li>
+  </ul>
+
+  <h2>Servicios de terceros</h2>
+  <p>
+    La app no utiliza la nube de EcoFlow para telemetría. El User ID del fabricante solo se emplea
+    localmente para el handshake cifrado BLE (encrypt_type 7), si lo configuras.
+  </p>
+
+  <h2>Contacto</h2>
+  <p>
+    Repositorio del proyecto:
+    <a href="https://github.com/travelbikecz-dap/VanPower">github.com/travelbikecz-dap/VanPower</a>
+  </p>
+</body>
+</html>

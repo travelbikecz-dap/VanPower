@@ -25,6 +25,7 @@ import com.vanpower.ecoflowauto.ble.protocol.PassthroughAssembler
 import com.vanpower.ecoflowauto.ble.protocol.Type7Encryption
 import com.vanpower.ecoflowauto.data.Delta3Telemetry
 import com.vanpower.ecoflowauto.data.DeviceConfig
+import com.vanpower.ecoflowauto.data.OutputPortSnapshot
 import com.vanpower.ecoflowauto.data.PortType
 import java.security.MessageDigest
 import java.util.UUID
@@ -45,6 +46,7 @@ class Delta3BleClient(
     private var assembler: FrameAssembler = PassthroughAssembler()
     private var encryption: Type7Encryption? = null
     private val deviceState = Delta3DeviceState()
+    private var savedOutputsBeforeSuspend: OutputPortSnapshot? = null
     private var authenticated = false
     private var serviceUuid: UUID? = null
     private var notifyUuid: UUID? = null
@@ -190,6 +192,31 @@ class Delta3BleClient(
             }
             sendPacket(packet)
         }
+    }
+
+    fun setAllOutputsEnabled(enabled: Boolean) {
+        handler.post {
+            if (!authenticated) return@post
+            if (!enabled) {
+                savedOutputsBeforeSuspend = OutputPortSnapshot(
+                    acEnabled = deviceState.acOutputOn ?: false,
+                    usbEnabled = deviceState.usbOutputOn ?: false,
+                    dcEnabled = deviceState.dcOutputOn ?: false
+                )
+                applyOutputStates(ac = false, usb = false, dc = false)
+            } else {
+                val target = savedOutputsBeforeSuspend ?: OutputPortSnapshot(true, true, true)
+                applyOutputStates(target.acEnabled, target.usbEnabled, target.dcEnabled)
+            }
+        }
+    }
+
+    private fun applyOutputStates(ac: Boolean, usb: Boolean, dc: Boolean) {
+        sendPacket(Delta3Commands.setAcEnabled(ac))
+        handler.postDelayed({
+            sendPacket(Delta3Commands.setUsbEnabled(usb))
+            handler.postDelayed({ sendPacket(Delta3Commands.setDcEnabled(dc)) }, 300)
+        }, 300)
     }
 
     @SuppressLint("MissingPermission")

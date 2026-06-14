@@ -12,9 +12,9 @@ if (-not $gh) {
 
 gh auth status | Out-Null
 
-$existing = git remote get-url origin 2>$null
+$existing = git remote 2>$null | Where-Object { $_ -eq 'origin' }
 if ($existing) {
-    Write-Host "Remote origin ya configurado: $existing"
+    Write-Host "Remote origin ya configurado: $(git remote get-url origin)"
 } else {
     gh repo create VanPower --public --source=. --remote=origin --description "VanPower: control Delta 3 desde Android Auto (BLE)"
     Write-Host "Repositorio creado y remote origin configurado."

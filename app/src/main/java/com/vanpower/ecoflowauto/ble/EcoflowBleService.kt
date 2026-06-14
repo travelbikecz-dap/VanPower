@@ -89,6 +89,10 @@ class EcoflowBleService : Service() {
         client?.togglePort(port)
     }
 
+    fun setAllOutputsEnabled(enabled: Boolean) {
+        client?.setAllOutputsEnabled(enabled)
+    }
+
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onDestroy() {

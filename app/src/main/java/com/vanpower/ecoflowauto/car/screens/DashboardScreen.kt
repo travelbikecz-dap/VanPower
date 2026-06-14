@@ -11,6 +11,7 @@ import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.model.Toggle
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.lifecycleScope
 import com.vanpower.ecoflowauto.R
 import com.vanpower.ecoflowauto.car.CarAppAccess
 import com.vanpower.ecoflowauto.car.CarDemoState
@@ -19,8 +20,16 @@ import com.vanpower.ecoflowauto.car.CarTimeFormat
 import com.vanpower.ecoflowauto.data.Delta3Telemetry
 import com.vanpower.ecoflowauto.data.DeviceRepository
 import com.vanpower.ecoflowauto.data.PortType
+import kotlinx.coroutines.launch
 
 class DashboardScreen(carContext: CarContext) : Screen(carContext) {
+
+    init {
+        lifecycleScope.launch {
+            val app = CarAppAccess.app(carContext) ?: return@launch
+            app.stateHolder.telemetry.collect { invalidate() }
+        }
+    }
 
     override fun onGetTemplate(): Template {
         return try {
@@ -172,6 +181,8 @@ class DashboardScreen(carContext: CarContext) : Screen(carContext) {
         if (previous == isChecked) return
         if (isDemo) {
             CarDemoState.setPort(port, isChecked)
+        } else if (port == PortType.POWER) {
+            repository.setAllOutputsEnabled(isChecked)
         } else {
             repository.togglePort(port)
         }

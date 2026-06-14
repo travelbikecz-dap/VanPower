@@ -77,10 +77,16 @@ class Delta3DeviceState {
         acEnabled = acOutputOn ?: false,
         usbEnabled = usbOutputOn ?: false,
         dcEnabled = dcOutputOn ?: false,
-        powerOn = true,
+        powerOn = outputsActive(acOutputOn, usbOutputOn, dcOutputOn),
         connected = connected
     )
 }
+
+private fun outputsActive(
+    ac: Boolean?,
+    usb: Boolean?,
+    dc: Boolean?
+): Boolean = (ac == true) || (usb == true) || (dc == true)
 
 object Delta3Commands {
     fun setAcEnabled(enabled: Boolean) = configPacket(Delta3Fields.CFG_AC_OUT_OPEN, enabled)
